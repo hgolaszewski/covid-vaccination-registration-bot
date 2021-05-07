@@ -1,0 +1,8 @@
+{
+  "jobs" : [
+    {
+      "payload" : "{\"dayRange\":{\"from\":\"2021-05-08\",\"to\":\"2021-05-29\"},\"hourRange\":{\"from\":\"00:00\",\"to\":\"23:59\"},\"geoId\":\"1465011\",\"prescriptionId\":\"%s\",\"voiId\":\"14\",\"vaccineTypes\":[ \"cov19.pfizer\"]}",
+      "city" : "warszawa"
+    }
+ ]
+}
