@@ -89,6 +89,7 @@ public class JobExecutor implements Runnable {
             return true;
           }
         })
+        .filter(CustomFilter.YOUR_FILTER)
         .peek(appointment -> log.info("Found appointment: {} ", appointment))
         .min(comparingInt(appointment -> (int) appointment.getStartAt().toInstant().toEpochMilli()));
   }
