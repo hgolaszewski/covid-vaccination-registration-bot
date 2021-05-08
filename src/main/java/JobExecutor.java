@@ -33,7 +33,7 @@ public class JobExecutor implements Runnable {
 
     if (notRegistered) {
 
-      log.info("Searching for available appointment dates with params: {}", job.getPayload());
+      //log.info("Searching for available appointment dates with params: {}", job.getPayload());
 
       getAppointmentsList()
           .flatMap(this::getMatchingAppointment)
@@ -116,6 +116,8 @@ public class JobExecutor implements Runnable {
         );
         registrationRequest.setEntity(registerRequestBody);
 
+        Thread.sleep(900);
+
         HttpResponse registerResponse = Utils.httpClient.execute(registrationRequest);
 
         // TODO - make sure that appointment was in fact confirmed (failed requests also returns 200 OK)
@@ -124,7 +126,7 @@ public class JobExecutor implements Runnable {
           log.warn("Response code for registration: {}", registerResponse.getStatusLine().getStatusCode());
         }
 
-        log.info("Appointment confirmed: {}", matchingAppointment.getId());
+        log.info("Appointment confirmed: {}", matchingAppointment);
 
         Config.config().setConfirmedAppointment(matchingAppointment);
 
@@ -145,8 +147,6 @@ public class JobExecutor implements Runnable {
         Config.config().getUrlAppointmentCancel(), appointmentToCancel.getId())
     );
     Config.config().getRequestHeaders().forEach(deleteRequest::addHeader);
-
-    Thread.sleep(1000);
 
     HttpResponse deleteResponse = Utils.httpClient.execute(deleteRequest);
 

@@ -39,6 +39,7 @@ public class BotStarter {
       if (!answer.equals("y")) {
         System.exit(1);
       }
+      log.info("Searching for available appointments...");
     }
   }
 
